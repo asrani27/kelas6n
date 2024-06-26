@@ -4,7 +4,7 @@
 <div class="row" style="padding-top: 25px; padding-left:25px;">
     <div class="card mb-4">
         <div class="card-body">
-            Selamat Datang di Aplikasi SIAK
+            Hi, {{Auth::user()->nama}}
         </div>
     </div>
 </div>

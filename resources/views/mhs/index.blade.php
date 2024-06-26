@@ -1,38 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Mahasiswa</title>
-</head>
-<body>
-    <a href="/">< Kembali</a>
-    <h1>DATA MAHASISWA</h1>
-    <a href="/mahasiswa/add">+ TAMBAH DATA</a> | 
-    <a href="/mahasiswa/cetak" target="_blank">CETAK PDF</a>
-    <table border="1" cellpadding="10px">
-        <tr>
-            <td>NO</td>
-            <td>NPM</td>
-            <td>NAMA</td>
-            <td>JURUSAN</td>
-            <td>AKSI/TOMBOL</td>
-        </tr>
+@extends('layout.master')
+@section('content')
+<div class="row" style="padding-top: 25px; padding-left:25px;">
+    <div class="col-md-12" style="padding-left: 0px;">
+        <a class="btn btn-primary" href="/mahasiswa/add"> <i class="fas fa-plus"></i> TAMBAH DATA</a> | 
+        <a class="btn btn-danger" href="/mahasiswa/cetak" target="_blank"> <i class="fas fa-print"></i> CETAK PDF</a>
+    </div>
+    <br/><br/>
+    <div class="card">
+        <div class="card-header">
+            <i class="fas fa-users"></i>  Data Mahasiswa
+        </div>
+        <div class="card-body">
+            <table id="datatablesSimple">
+                <tr>
+                    <td>NO</td>
+                    <td>NPM</td>
+                    <td>NAMA</td>
+                    <td>JURUSAN</td>
+                    <td>AKSI/TOMBOL</td>
+                </tr>
+                @foreach($mahasiswa as $nomor => $item)
+                <tr>
+                    <td>{{$nomor + 1}}</td>
+                    <td>{{$item->npm}}</td>
+                    <td>{{$item->nama}}</td>
+                    <td>{{$item->jurusan}}</td>
+                    <td>
+                        <a class="btn btn-sm btn-success" href="/mahasiswa/edit/{{$item->id}}"><i class="fas fa-edit"></i> EDIT</a> |
+                        <a class="btn btn-sm btn-warning" href="/mahasiswa/delete/{{$item->id}}"><i class="fas fa-trash"></i> HAPUS</a> 
+                    </td>
+                </tr>
+                @endforeach
+            </table>
+        </div>
+    </div>
 
-        @foreach($mahasiswa as $nomor => $item)
-        <tr>
-            <td>{{$nomor + 1}}</td>
-            <td>{{$item->npm}}</td>
-            <td>{{$item->nama}}</td>
-            <td>{{$item->jurusan}}</td>
-            <td>
-                <a href="/mahasiswa/edit/{{$item->id}}">EDIT</a> |
-                <a href="/mahasiswa/delete/{{$item->id}}">HAPUS</a> 
-            </td>
-        </tr>
-        @endforeach
+</div>
 
-    </table>
-</body>
-</html>
+
+@endsection
